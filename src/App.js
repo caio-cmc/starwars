@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import FilterPlanets from './components/FilterPlanets';
+import SearchInput from './components/SearchInput';
+import RemoveButton from './components/RemoveButton';
+import Table from './components/Table';
+import StarProvider from './contexts/StarProvider';
+import SortPlanets from './components/SortPlanets';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Star Wars Project</h1>
+      <StarProvider>
+        <SearchInput />
+        <FilterPlanets />
+        <SortPlanets />
+        <RemoveButton />
+        <Table />
+      </StarProvider>
     </div>
   );
 }
