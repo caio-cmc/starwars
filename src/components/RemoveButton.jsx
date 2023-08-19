@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import StarContext from '../contexts/StarContext';
+import '../styles/Components/RemoveButton.scss';
 
 function RemoveButton() {
   const {
@@ -21,14 +22,15 @@ function RemoveButton() {
   return (
     <div>
       {filterByNumericValues.map((each, index) => (
-        <div data-testid="filter" key={ index }>
-          <span>{`${each.column} ${each.comparison} ${each.value}`}</span>
+        <div className='remove-main' key={ index }>
+          <span className='remove-text'>{`${each.column} ${each.comparison} ${each.value}`}</span>
           <button
+            className='remove-button'
             type="button"
             onClick={ deleteFilter }
             id={ each.column }
           >
-            X
+            x
           </button>
         </div>
       ))}

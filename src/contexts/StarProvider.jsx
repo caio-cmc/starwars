@@ -9,11 +9,12 @@ function StarProvider({ children }) {
   const [filterByName, setFilterByName] = useState('');
   const [filterByNumericValues, setFilterByNumericValues] = useState([]);
   const [currentFilter, setCurrentFilter] = useState({
-    column: 'population', comparison: 'maior que', value: 0,
+    column: 'population', comparison: 'greater than', value: 0,
   });
   const [order, setOrder] = useState({
     column: 'population', sort: 'ASC',
   });
+  const [loading, setLoading] = useState(true);
   const minusOne = -1;
   const one = 1;
 
@@ -26,10 +27,20 @@ function StarProvider({ children }) {
       planetsArray.sort((a, b) => (a.name < b.name ? minusOne : one));
       setData(planetsArray);
       setDataFilter(planetsArray);
+      setLoading(false);
     }
 
     fetchPlanets();
   }, [minusOne]);
+
+  const dateConverter = (date) => {
+    const newDate = new Date(date);
+    const day = newDate.getDate();
+    const month = newDate.getMonth() + 1;
+    const year = newDate.getFullYear();
+    const formatedDate = `${day}/${month}/${year}`
+    return formatedDate;
+  }
 
   const starValue = {
     data,
@@ -45,7 +56,10 @@ function StarProvider({ children }) {
     currentFilter,
     setCurrentFilter,
     order,
-    setOrder };
+    setOrder,
+    loading,
+    dateConverter
+  };
 
   return (
     <StarContext.Provider value={ starValue }>

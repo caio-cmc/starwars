@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import StarContext from '../contexts/StarContext';
+import '../styles/Components/SortPlanets.scss';
 
 function SortPlanets() {
   const { data, setData, order, setOrder } = useContext(StarContext);
@@ -19,42 +20,42 @@ function SortPlanets() {
   };
 
   return (
-    <div>
-      <select data-testid="column-sort" name="column" onChange={ handleChange }>
+    <div className='sort-main'>
+      <select className='sort-dropdown' name="column" onChange={ handleChange }>
         <option value="population">population</option>
         <option value="orbital_period">orbital_period</option>
         <option value="diameter">diameter</option>
         <option value="rotation_period">rotation_period</option>
         <option value="surface_water">surface_water</option>
       </select>
-      <label htmlFor="ascendente">
+      <label className="radio-label" htmlFor="ascendente">
         <input
           type="radio"
-          data-testid="column-sort-input-asc"
           value="ASC"
           id="ascendente"
           name="sort"
+          className="radio-button asc"
           onClick={ handleChange }
         />
-        Ascendente
+        Ascending
       </label>
-      <label htmlFor="descendente">
+      <label className="radio-label" htmlFor="descendente">
         <input
           type="radio"
-          data-testid="column-sort-input-desc"
           value="DESC"
           id="descendente"
           name="sort"
+          className="radio-button desc"
           onClick={ handleChange }
         />
-        Descendente
+        Descending
       </label>
       <button
+        className='sort-button'
         type="button"
-        data-testid="column-sort-button"
         onClick={ handleSort }
       >
-        Ordenar
+        Sort
       </button>
     </div>
   );

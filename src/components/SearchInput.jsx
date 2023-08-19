@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import StarContext from '../contexts/StarContext';
+import '../styles/Components/SearchInput.scss';
 
 function SearchInput() {
   const { setData, dataFilter, filterByName,
@@ -25,8 +26,8 @@ function SearchInput() {
         type="text"
         value={ filterByName }
         onChange={ handleChange }
-        placeholder="Filtrar por nome"
-        data-testid="name-filter"
+        placeholder="Search for planets"
+        className="search-input"
       />
     </div>
   );

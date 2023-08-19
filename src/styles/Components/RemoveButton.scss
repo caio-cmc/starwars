@@ -1,0 +1,48 @@
+.remove-main {
+  display: flex;
+  align-items: center;
+}
+
+.remove-text {
+  color: #FFE81F;
+  font-size: x-large;
+  padding: 0 0.5rem;
+}
+
+.remove-button {
+  cursor: pointer;
+  width: 2rem;
+  height: 2rem;
+  border: solid 2px #FFE81F;
+  border-radius: 5px;
+  background-color: #000;
+  color: #FFE81F;
+  z-index: 1;
+
+  position: relative;
+  transition: 1s ease-in;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 0;
+    transition-duration: 1s;
+    z-index: -1;
+  }
+
+  &:hover {
+    color: #2FF924;
+    border: solid 2px #2FF924;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #2FF924, 0 0 25px #2FF924, 0 0 10px #2FF924, 0 0 10px #2FF924;
+  }
+
+  &:hover::before {
+    height: 100%;
+    border-radius: 5px;
+    background-color: white;
+  }
+}

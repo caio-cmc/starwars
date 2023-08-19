@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import StarContext from '../contexts/StarContext';
+import '../styles/Components/FilterPlanets.scss';
 
 function FilterPlanets() {
   const {
@@ -20,11 +21,11 @@ function FilterPlanets() {
     const { column, comparison, value } = currentFilter;
     let filteredData;
     setFilterByNumericValues([...filterByNumericValues, currentFilter]);
-    if (comparison === 'maior que') {
+    if (comparison === 'greater than') {
       filteredData = data.filter((planet) => planet[column]
         > parseInt(value, 10));
       setData(filteredData);
-    } else if (comparison === 'menor que') {
+    } else if (comparison === 'less than') {
       filteredData = data.filter((planet) => planet[column]
         < parseInt(value, 10));
       setData(filteredData);
@@ -36,9 +37,9 @@ function FilterPlanets() {
   };
 
   return (
-    <div>
+    <div className='filter-main'>
       <select
-        data-testid="column-filter"
+        className='filter-dropdown'
         value={ currentFilter.column }
         onChange={ handleChange }
         id="column"
@@ -55,28 +56,28 @@ function FilterPlanets() {
           ? null : <option value="surface_water">surface_water</option>}
       </select>
       <select
-        data-testid="comparison-filter"
+        className='filter-dropdown'
         value={ currentFilter.comparison }
         onChange={ handleChange }
         id="comparison"
       >
-        <option value="maior que">maior que</option>
-        <option value="menor que">menor que</option>
-        <option value="igual a">igual a</option>
+        <option value="greater than">greater than</option>
+        <option value="less than">less than</option>
+        <option value="equals">equals</option>
       </select>
       <input
-        data-testid="value-filter"
+        className='filter-input'
         value={ currentFilter.value }
         onChange={ handleChange }
         type="number"
         id="value"
       />
       <button
-        data-testid="button-filter"
+        className='filter-button'
         onClick={ applyFilter }
         type="button"
       >
-        Filtrar
+        Filter
       </button>
     </div>
   );

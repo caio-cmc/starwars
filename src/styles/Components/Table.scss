@@ -1,0 +1,24 @@
+.table-general {
+  display: flex;
+  justify-content: center;
+}
+
+.table-main {
+  text-align: center;
+  width: 90%;
+  border: 4px solid #FFE81F;
+  background-color: black;
+  border-collapse: collapse;
+  margin-bottom: 0.5rem;
+}
+
+tr, th, td {
+  border: 4px solid #FFE81F;
+  padding: 0.15rem 0.5rem;
+  color: #FFE81F;
+}
+
+.table-film {
+  margin: 0;
+  padding: 3px;
+}

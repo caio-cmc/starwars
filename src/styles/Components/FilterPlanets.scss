@@ -1,0 +1,60 @@
+.filter-main {
+  margin: 0 2rem;
+}
+
+.filter-dropdown,
+.filter-input,
+.filter-button {
+  margin: 0 0.5rem;
+  height: 2rem;
+  font-size: x-large;
+  background-color: gray;
+  color: #fff;
+}
+
+.filter-dropdown {
+  width: 8rem;
+}
+
+.filter-input {
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+  }
+}
+
+.filter-button {
+  cursor: pointer;
+  width: 6rem;
+  border: solid 2px #FFE81F;
+  border-radius: 5px;
+  background-color: #000;
+  color: #FFE81F;
+  z-index: 1;
+
+  position: relative;
+  transition: 1s ease-in;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 0;
+    transition-duration: 1s;
+    z-index: -1;
+  }
+
+  &:hover {
+    color: #2E67F8;
+    border: solid 2px #2E67F8;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #2E67F8, 0 0 25px #2E67F8, 0 0 10px #2E67F8, 0 0 10px #2E67F8;
+  }
+
+  &:hover::before {
+    width: 100%;
+    border-radius: 5px;
+    background-color: white;
+  }
+}
