@@ -15,6 +15,7 @@ function StarProvider({ children }) {
     column: 'population', sort: 'ASC',
   });
   const [loading, setLoading] = useState(true);
+  const [loadDots, setLoadDots] = useState('LOADING');
   const minusOne = -1;
   const one = 1;
 
@@ -58,6 +59,8 @@ function StarProvider({ children }) {
     order,
     setOrder,
     loading,
+    loadDots,
+    setLoadDots,
     dateConverter
   };
 

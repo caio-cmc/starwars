@@ -56,7 +56,7 @@
     color: red;
     border: solid 2px red;
     border-radius: 5px;
-    box-shadow: 0 0 5px red, 0 0 25px red, 0 0 10px red, 0 0 10px red;
+    box-shadow: 0 0 10px 3px red;
   }
 
   &:hover::before {
