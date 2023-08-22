@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import StarContext from './StarContext';
 
 function StarProvider({ children }) {
+  const [ogData, setOgData] = useState([]);
   const [data, setData] = useState([]);
   const [dataFilter, setDataFilter] = useState([]);
-  const [preFilter, setPreFilter] = useState([]);
   const [filterByName, setFilterByName] = useState('');
   const [filterByNumericValues, setFilterByNumericValues] = useState([]);
   const [currentFilter, setCurrentFilter] = useState({
@@ -14,18 +14,20 @@ function StarProvider({ children }) {
   const [order, setOrder] = useState({
     column: 'population', sort: 'ASC',
   });
+  const [isFiltering, setIsFiltering] = useState(false);
   const [loading, setLoading] = useState(true);
   const [loadDots, setLoadDots] = useState('LOADING');
   const minusOne = -1;
   const one = 1;
 
-  // sort da linha 27: -1 representa a ordem crescente e 1 a decrescente
   useEffect(() => {
     async function fetchPlanets() {
       const promise = await fetch('https://swapi.dev/api/planets/');
       const json = await promise.json();
       const planetsArray = json.results;
+      // sort: -1 representa a ordem crescente e 1 a decrescente
       planetsArray.sort((a, b) => (a.name < b.name ? minusOne : one));
+      setOgData(planetsArray);
       setData(planetsArray);
       setDataFilter(planetsArray);
       setLoading(false);
@@ -44,12 +46,11 @@ function StarProvider({ children }) {
   }
 
   const starValue = {
+    ogData,
     data,
     setData,
     dataFilter,
     setDataFilter,
-    preFilter,
-    setPreFilter,
     filterByName,
     setFilterByName,
     filterByNumericValues,
@@ -58,6 +59,8 @@ function StarProvider({ children }) {
     setCurrentFilter,
     order,
     setOrder,
+    isFiltering,
+    setIsFiltering,
     loading,
     loadDots,
     setLoadDots,

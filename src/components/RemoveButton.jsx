@@ -4,19 +4,19 @@ import '../styles/Components/RemoveButton.scss';
 
 function RemoveButton() {
   const {
+    ogData,
     filterByNumericValues,
     setFilterByNumericValues,
     setData,
-    preFilter,
-    setPreFilter } = useContext(StarContext);
+    setIsFiltering
+  } = useContext(StarContext);
 
   const deleteFilter = ({ target }) => {
     const filterToRemove = filterByNumericValues.filter((info) => info.column
       !== target.id);
     setFilterByNumericValues(filterToRemove);
-    setData(preFilter[preFilter.length - 1]);
-    const removeLastPosition = preFilter.slice(0, preFilter.length - 1);
-    setPreFilter(removeLastPosition);
+    setData(ogData);
+    setIsFiltering(false);
   };
 
   const capitalize = (str) => {

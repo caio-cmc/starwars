@@ -6,18 +6,19 @@ function FilterPlanets() {
   const {
     data,
     setData,
-    setPreFilter,
     filterByNumericValues,
     setFilterByNumericValues,
     currentFilter,
-    setCurrentFilter } = useContext(StarContext);
+    setCurrentFilter,
+    isFiltering,
+    setIsFiltering,
+  } = useContext(StarContext);
 
   const handleChange = ({ target }) => {
     setCurrentFilter({ ...currentFilter, [target.id]: target.value });
   };
 
   const applyFilter = () => {
-    setPreFilter((oldArray) => [...oldArray, data]);
     const { column, comparison, value } = currentFilter;
     let filteredData;
     setFilterByNumericValues([...filterByNumericValues, currentFilter]);
@@ -34,6 +35,7 @@ function FilterPlanets() {
         === value);
       setData(filteredData);
     }
+    setIsFiltering(true);
   };
 
   return (
@@ -44,16 +46,11 @@ function FilterPlanets() {
         onChange={ handleChange }
         id="column"
       >
-        {filterByNumericValues.some((each) => each.column === 'population')
-          ? null : <option value="population">Population</option>}
-        {filterByNumericValues.some((each) => each.column === 'orbital_period')
-          ? null : <option value="orbital_period">Orbital period</option>}
-        {filterByNumericValues.some((each) => each.column === 'diameter')
-          ? null : <option value="diameter">Diameter</option>}
-        {filterByNumericValues.some((each) => each.column === 'rotation_period')
-          ? null : <option value="rotation_period">Rotation period</option>}
-        {filterByNumericValues.some((each) => each.column === 'surface_water')
-          ? null : <option value="surface_water">Surface water</option>}
+        <option value="population">Population</option>
+        <option value="orbital_period">Orbital period</option>
+        <option value="diameter">Diameter</option>
+        <option value="rotation_period">Rotation period</option>
+        <option value="surface_water">Surface water</option>
       </select>
       <select
         className='filter-dropdown'
@@ -76,6 +73,7 @@ function FilterPlanets() {
         className='filter-button'
         onClick={ applyFilter }
         type="button"
+        disabled={ isFiltering }
       >
         Filter
       </button>

@@ -57,4 +57,18 @@
     border-radius: 5px;
     background-color: white;
   }
+
+  &:disabled {
+    cursor: default;
+    color: grey;
+    border: solid 2px grey;
+
+    &:hover {
+      box-shadow: 0 0 10px 3px transparent;
+
+      &::before{
+        background-color: #000;
+      }
+    }
+  }
 }
