@@ -10,11 +10,15 @@ function SortPlanets() {
   };
 
   const handleSort = () => {
+    const numericValues = data.filter((i) => i[order.column] !== 'unknown');
+    const nanValues = data.filter((i) => i[order.column] === 'unknown');
     if (order.sort === 'ASC') {
-      const ascNumbers = [...data].sort((a, b) => a[order.column] - b[order.column]);
+      const ascNumbers = [...numericValues].sort((a, b) => a[order.column] - b[order.column]);
+      nanValues.map(i => ascNumbers.push(i));
       setData(ascNumbers);
     } else {
-      const descNumbers = [...data].sort((a, b) => b[order.column] - a[order.column]);
+      const descNumbers = [...numericValues].sort((a, b) => b[order.column] - a[order.column]);
+      nanValues.map(i => descNumbers.push(i));
       setData(descNumbers);
     }
   };
@@ -22,11 +26,11 @@ function SortPlanets() {
   return (
     <div className='sort-main'>
       <select className='sort-dropdown' name="column" onChange={ handleChange }>
-        <option value="population">population</option>
-        <option value="orbital_period">orbital_period</option>
-        <option value="diameter">diameter</option>
-        <option value="rotation_period">rotation_period</option>
-        <option value="surface_water">surface_water</option>
+        <option value="population">Population</option>
+        <option value="orbital_period">Orbital period</option>
+        <option value="diameter">Diameter</option>
+        <option value="rotation_period">Rotation period</option>
+        <option value="surface_water">Surface water</option>
       </select>
       <label className="radio-label" htmlFor="ascendente">
         <input

@@ -45,15 +45,15 @@ function FilterPlanets() {
         id="column"
       >
         {filterByNumericValues.some((each) => each.column === 'population')
-          ? null : <option value="population">population</option>}
+          ? null : <option value="population">Population</option>}
         {filterByNumericValues.some((each) => each.column === 'orbital_period')
-          ? null : <option value="orbital_period">orbital_period</option>}
+          ? null : <option value="orbital_period">Orbital period</option>}
         {filterByNumericValues.some((each) => each.column === 'diameter')
-          ? null : <option value="diameter">diameter</option>}
+          ? null : <option value="diameter">Diameter</option>}
         {filterByNumericValues.some((each) => each.column === 'rotation_period')
-          ? null : <option value="rotation_period">rotation_period</option>}
+          ? null : <option value="rotation_period">Rotation period</option>}
         {filterByNumericValues.some((each) => each.column === 'surface_water')
-          ? null : <option value="surface_water">surface_water</option>}
+          ? null : <option value="surface_water">Surface water</option>}
       </select>
       <select
         className='filter-dropdown'
