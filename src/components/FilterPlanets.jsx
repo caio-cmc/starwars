@@ -6,6 +6,7 @@ function FilterPlanets() {
   const {
     data,
     setData,
+    setDataFilter,
     filterByNumericValues,
     setFilterByNumericValues,
     currentFilter,
@@ -20,21 +21,24 @@ function FilterPlanets() {
 
   const applyFilter = () => {
     const { column, comparison, value } = currentFilter;
-    let filteredData;
     setFilterByNumericValues([...filterByNumericValues, currentFilter]);
     if (comparison === 'greater than') {
-      filteredData = data.filter((planet) => planet[column]
+      const filteredData = data.filter((planet) => planet[column]
         > parseInt(value, 10));
       setData(filteredData);
+      setDataFilter(filteredData);
     } else if (comparison === 'less than') {
-      filteredData = data.filter((planet) => planet[column]
+      const filteredData = data.filter((planet) => planet[column]
         < parseInt(value, 10));
       setData(filteredData);
+      setDataFilter(filteredData);
     } else {
-      filteredData = data.filter((planet) => planet[column]
+      const filteredData = data.filter((planet) => planet[column]
         === value);
       setData(filteredData);
+      setDataFilter(filteredData);
     }
+
     setIsFiltering(true);
   };
 

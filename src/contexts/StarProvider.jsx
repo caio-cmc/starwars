@@ -15,6 +15,7 @@ function StarProvider({ children }) {
     column: 'population', sort: 'ASC',
   });
   const [isFiltering, setIsFiltering] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
   const [loading, setLoading] = useState(true);
   const [loadDots, setLoadDots] = useState('LOADING');
   const minusOne = -1;
@@ -29,7 +30,6 @@ function StarProvider({ children }) {
       planetsArray.sort((a, b) => (a.name < b.name ? minusOne : one));
       setOgData(planetsArray);
       setData(planetsArray);
-      setDataFilter(planetsArray);
       setLoading(false);
     }
 
@@ -61,6 +61,8 @@ function StarProvider({ children }) {
     setOrder,
     isFiltering,
     setIsFiltering,
+    isSearching,
+    setIsSearching,
     loading,
     loadDots,
     setLoadDots,
