@@ -4,24 +4,33 @@ import '../styles/Components/RemoveButton.scss';
 
 function RemoveButton() {
   const {
-    ogData,
     filterByNumericValues,
     setFilterByNumericValues,
-    setData,
-    setIsFiltering
+    setIsFiltering,
+    filterOpt,
+    setFilterOpt
   } = useContext(StarContext);
+
+  const capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
+  const createOpt = (column) => {
+    const optName = column.includes('_') ? capitalize(column.replace('_', ' ')) : capitalize(column);
+    const newOpt = { value: column, name: optName };
+    setFilterOpt([...filterOpt, newOpt]);
+  };
 
   const deleteFilter = ({ target }) => {
     const filterToRemove = filterByNumericValues.filter((info) => info.column
       !== target.id);
     setFilterByNumericValues(filterToRemove);
-    setData(ogData);
-    setIsFiltering(false);
+    createOpt(target.id);
+    const filtLength = filterByNumericValues.length;
+    if (filtLength === 0) {
+      setIsFiltering(false);
+    }
   };
-
-  const capitalize = (str) => {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  }
 
   return (
     <div>

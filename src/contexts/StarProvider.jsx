@@ -11,6 +11,13 @@ function StarProvider({ children }) {
   const [currentFilter, setCurrentFilter] = useState({
     column: 'population', comparison: 'greater than', value: 0,
   });
+  const [filterOpt, setFilterOpt] = useState([
+    { value: 'population', name: 'Population' },
+    { value: 'orbital_period', name: 'Orbital period' },
+    { value: 'diameter', name: 'Diameter' },
+    { value: 'rotation_period', name: 'Rotation period' },
+    { value: 'surface_water', name: 'Surface water' }
+  ]);
   const [order, setOrder] = useState({
     column: 'population', sort: 'ASC',
   });
@@ -57,6 +64,8 @@ function StarProvider({ children }) {
     setFilterByNumericValues,
     currentFilter,
     setCurrentFilter,
+    filterOpt,
+    setFilterOpt,
     order,
     setOrder,
     isFiltering,
