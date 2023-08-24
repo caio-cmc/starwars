@@ -5,7 +5,6 @@ import '../styles/Components/SearchInput.scss';
 function SearchInput() {
   const {
     ogData,
-    data,
     setData,
     dataFilter,
     filterByName,
@@ -42,7 +41,7 @@ function SearchInput() {
       }
     }
     listUpdate();
-  }, [data, dataFilter, filterByName, isFiltering, isSearching, ogData, setData]);
+  }, [dataFilter, filterByName, isFiltering, isSearching, ogData, setData]);
 
   return (
     <div>
