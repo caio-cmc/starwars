@@ -10,14 +10,30 @@ function FilterPlanets() {
     filterByNumericValues,
     setFilterByNumericValues,
     currentFilter,
+    filterOpt,
+    setFilterOpt,
     setCurrentFilter,
-    isFiltering,
     setIsFiltering,
   } = useContext(StarContext);
 
   const handleChange = ({ target }) => {
     setCurrentFilter({ ...currentFilter, [target.id]: target.value });
   };
+
+  const updateOpts = () => {
+    const { column } = currentFilter;
+    const newOpts = filterOpt.filter(opt => column !== opt.value);
+    if (newOpts.length > 0) {
+      setCurrentFilter({
+        column: newOpts[0].value, comparison: 'greater than', value: 0,
+      })
+    } else {
+      setCurrentFilter({
+        column: '', comparison: 'greater than', value: 0,
+      })
+    }
+    setFilterOpt(newOpts);
+  }
 
   const applyFilter = () => {
     const { column, comparison, value } = currentFilter;
@@ -38,7 +54,7 @@ function FilterPlanets() {
       setData(filteredData);
       setDataFilter(filteredData);
     }
-
+    updateOpts();
     setIsFiltering(true);
   };
 
@@ -50,11 +66,9 @@ function FilterPlanets() {
         onChange={ handleChange }
         id="column"
       >
-        <option value="population">Population</option>
-        <option value="orbital_period">Orbital period</option>
-        <option value="diameter">Diameter</option>
-        <option value="rotation_period">Rotation period</option>
-        <option value="surface_water">Surface water</option>
+        { filterOpt.map((opt) =>
+          filterByNumericValues.some((each) => each.column === opt.value)
+          ? null : <option value={ opt.value }>{ opt.name }</option>) }
       </select>
       <select
         className='filter-dropdown'
@@ -77,7 +91,7 @@ function FilterPlanets() {
         className='filter-button'
         onClick={ applyFilter }
         type="button"
-        disabled={ isFiltering }
+        disabled={ filterOpt.length > 0 ? false : true }
       >
         Filter
       </button>
