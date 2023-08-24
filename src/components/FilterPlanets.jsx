@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import StarContext from '../contexts/StarContext';
 import '../styles/Components/FilterPlanets.scss';
 
 function FilterPlanets() {
   const {
-    data,
+    ogData,
     setData,
     setDataFilter,
     filterByNumericValues,
@@ -36,27 +36,34 @@ function FilterPlanets() {
   }
 
   const applyFilter = () => {
-    const { column, comparison, value } = currentFilter;
     setFilterByNumericValues([...filterByNumericValues, currentFilter]);
-    if (comparison === 'greater than') {
-      const filteredData = data.filter((planet) => planet[column]
-        > parseInt(value, 10));
-      setData(filteredData);
-      setDataFilter(filteredData);
-    } else if (comparison === 'less than') {
-      const filteredData = data.filter((planet) => planet[column]
-        < parseInt(value, 10));
-      setData(filteredData);
-      setDataFilter(filteredData);
-    } else {
-      const filteredData = data.filter((planet) => planet[column]
-        === value);
-      setData(filteredData);
-      setDataFilter(filteredData);
-    }
     updateOpts();
     setIsFiltering(true);
   };
+
+  useEffect(() => {
+    const concatFilters = () => {
+      const filtLength = filterByNumericValues.length;
+      if (filtLength === 0) {
+        setData(ogData);
+      } else {
+        let filteredData = ogData;
+        filterByNumericValues.forEach((filt) => {
+          const { column, comparison, value } = filt;
+          if (comparison === 'greater than') {
+            filteredData = filteredData.filter((planet) => planet[column] > parseInt(value, 10));
+          } else if (comparison === 'less than') {
+            filteredData = filteredData.filter((planet) => planet[column] < parseInt(value, 10));
+          } else {
+            filteredData = filteredData.filter((planet) => planet[column] === value);
+          }
+        });
+        setData(filteredData);
+        setDataFilter(filteredData);
+      }
+    };
+    concatFilters();
+  }, [filterByNumericValues, ogData, setData, setDataFilter]);
 
   return (
     <div className='filter-main'>
